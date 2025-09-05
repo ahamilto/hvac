@@ -497,6 +497,7 @@ class TestPki(HvacIntegrationTestCase, TestCase):
             name=role_name,
             default_user=default_user,
             key_type=key_type,
+            allowed_users="*",
             allow_user_certificates=True,
             mount_point=self.TEST_MOUNT_POINT,
         )
