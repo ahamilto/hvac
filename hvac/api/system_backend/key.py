@@ -211,7 +211,7 @@ class Key(SystemBackendMixin):
             json=params,
         )
 
-    def cancel_rekey(self, recovery_key=False):
+    def cancel_rekey(self, nonce=None, recovery_key=False):
         """Cancel any in-progress rekey.
 
         This clears the rekey settings as well as any progress made. This must be called to change the parameters of the
@@ -230,10 +230,14 @@ class Key(SystemBackendMixin):
         :rtype: requests.Response
         """
         api_path = "/v1/sys/rekey/init"
+        params = {
+            'nonce': nonce
+        }
         if recovery_key:
             api_path = "/v1/sys/rekey-recovery-key/init"
         return self._adapter.delete(
             url=api_path,
+            json=params,
         )
 
     def rekey(self, key, nonce=None, recovery_key=False):
