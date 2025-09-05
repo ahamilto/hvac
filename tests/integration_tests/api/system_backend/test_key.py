@@ -73,10 +73,10 @@ class TestKey(HvacIntegrationTestCase, TestCase):
 
         self.assertFalse(self.client.rekey_status["started"])
 
-        self.client.sys.start_rekey()
+        result = self.client.sys.start_rekey()
         self.assertTrue(self.client.rekey_status["started"])
 
-        self.client.sys.cancel_rekey()
+        self.client.sys.cancel_rekey(nonce=result["nonce"])
         self.assertFalse(self.client.rekey_status["started"])
 
         result = self.client.sys.start_rekey()
